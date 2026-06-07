@@ -130,17 +130,32 @@
         .matrix-mode a { color: #FFFFFF !important; }
         .matrix-mode pre { background-color: #111 !important; color: #00FF00 !important; border-color: #00FF00 !important;}
 
-        /* MULTI-CURSOR TRAIL CSS - Custom vector data to prevent broken images */
+        /* MONOCHROME OPERATING SYSTEM CURSOR TRAIL STYLE */
         .pointer-trail {
             position: absolute;
-            width: 14px;
-            height: 14px;
-            background-color: #FF00FF;
-            border-radius: 50%;
-            border: 1px solid #FFFFFF;
+            width: 12px;
+            height: 12px;
+            background-color: #333333;
+            border: 2px solid #FFFFFF;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            border-radius: 2px;
             pointer-events: none;
             z-index: 99999;
             transform: translate(-50%, -50%);
+        }
+
+        /* Ad-Block Proof Rolling Odometer Counter Style */
+        .retro-counter {
+            background-color: #000000;
+            color: #00FF00;
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+            font-size: 20px;
+            padding: 4px 8px;
+            border: 3px inset #808080;
+            letter-spacing: 3px;
+            display: inline-block;
+            margin-top: 5px;
         }
 
         /* Classic Beveled Input Fields */
@@ -166,7 +181,7 @@
 <body>
 
     <audio id="bg-midi" loop preload="auto">
-        <source src="https://ia600301.us.archive.org/29/items/milieu_midi_collection/kirby.mp3" type="audio/mp3">
+        <source src="https://assets.mixkit.co/active_storage/sfx/123/123-200.wav" type="audio/wav">
     </audio>
 
     <div class="search-container">
@@ -197,19 +212,23 @@
                 <p style="margin: 3px 0;"><a href="#guestbook">■ Sign Guestbook</a></p>
                 <p style="margin: 3px 0;"><a href="#privacy">■ Legal & Privacy</a></p>
 
-                <div class="midi-box">
-                    <strong>🎛️ CYBER-AUDIO DECK</strong><br>
-                    <span style="font-size: 9px; color: #FF0000; font-weight: bold; display: block; margin-bottom: 4px;">[SOUND ENABLED]</span>
-                    <button onclick="document.getElementById('bg-midi').play();" style="font-size:10px; font-weight:bold; cursor:pointer;">PLAY</button>
-                    <button onclick="document.getElementById('bg-midi').pause();" style="font-size:10px; cursor:pointer;">PAUSE</button>
-                    <br><span style="font-size:9px; color:#555; display:block; margin-top:3px;">Track: hyper_loop.mp3</span>
+                <div class="midi-box" style="background-color: #FFFFCC; border: 2px solid #FF0000;">
+                    <strong>🔊 MAINFRAME AUDIO</strong><br>
+                    <span style="font-size: 9px; color: #CC0000; display: block; margin-bottom: 6px;">Browser Security Override Required</span>
+                    <button onclick="initMidiAudio();" style="font-size:11px; font-weight:bold; background-color:#FFCC00; border:2px outset #FFF; cursor:pointer; padding:2px 6px;">ENGAGE AUDIO</button>
+                    <br>
+                    <button onclick="document.getElementById('bg-midi').pause();" style="font-size:9px; margin-top:5px; cursor:pointer;">MUTE SYSTEM</button>
                 </div>
 
                 <br><br>
                 <h4 style="margin-bottom: 5px; font-family: Arial;">System Badges:</h4>
                 <center>
-                    <img src="https://ia801309.us.archive.org/21/items/netscape-now-badge/netscapenow.gif" alt="Netscape Now!" width="88" style="border: 1px solid #000;"><br><br>
-                    <img src="https://ia800103.us.archive.org/17/items/linux-now-badge/linuxnow.gif" alt="Linux Now!" width="88" style="border: 1px solid #000;">
+                    <div style="border: 3px outset #FFFFFF; background-color: #000080; color: #FFFFFF; font-family: Arial; font-size: 11px; font-weight: bold; padding: 4px; width: 88px; text-align: center; margin-bottom: 10px; line-height: 1.1;">
+                        NETSCAPE<br><span style="color:#FFCC00; font-size:12px;">NOW!</span>
+                    </div>
+                    <div style="border: 3px outset #FFFFFF; background-color: #333333; color: #00FF00; font-family: monospace; font-size: 11px; font-weight: bold; padding: 4px; width: 88px; text-align: center; line-height: 1.1;">
+                        LINUX<br><span style="color:#FFFFFF;">POWERED</span>
+                    </div>
                 </center>
             </td>
 
@@ -225,7 +244,7 @@
                 </table>
 
                 <center>
-                    <small style="color: #666;">🎮 Easter Egg Hints: Type <strong>idkfa</strong> or use the classic <strong>Konami Code</strong> on your keyboard...</small>
+                    <small style="color: #666;">幕 Easter Egg Hints: Type <strong>idkfa</strong> or use the classic <strong>Konami Code</strong> on your keyboard...</small>
                 </center>
                 <br>
 
@@ -335,7 +354,7 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
                 <br>
                 <center>
                     <span style="font-size: 11px; font-family: Arial;">Site Status:</span><br>
-                    <img src="https://ia800103.us.archive.org/17/items/linux-now-badge/counter.gif" alt="Hit Counter" width="80">
+                    <div class="retro-counter" id="odometer-counter">007432</div>
                     <p style="font-size: 10px; color: #666666; line-height: 1.2;">Best viewed with a 56k dial-up modem. Do not pick up the house telephone.</p>
                 </center>
             </td>
@@ -343,24 +362,43 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
     </table>
 
     <script>
-        // HIGH-STABILITY MULTI-CURSOR SNAKE ENGINE
-        const trailLength = 12; // Expanded trail length for cooler slither look
+        // AUDIO ENGINE CONTROLLER (Bypasses Modern Browser Restrictions)
+        function initMidiAudio() {
+            const audioObj = document.getElementById('bg-midi');
+            audioObj.play().then(() => {
+                alert("Terminal sound pipeline synchronization complete! Synthesizer loop active.");
+            }).catch(err => {
+                alert("Audio pipeline warning: Interact with the main window grid first before initializing track engine.");
+            });
+        }
+
+        // DYNAMIC COUNTER TICKER ENGINE
+        setInterval(() => {
+            const counterEl = document.getElementById('odometer-counter');
+            let currentCount = parseInt(counterEl.innerText);
+            // Simulate random traffic nodes registering connections
+            if(Math.random() > 0.7) {
+                currentCount++;
+                counterEl.innerText = String(currentCount).padStart(6, '0');
+            }
+        }, 3000);
+
+        // HIGH-STABILITY MULTI-CURSOR SNAKE ENGINE (Monochrome Pointer Variant)
+        const trailLength = 10;
         const dots = [];
         const mouse = { x: 0, y: 0 };
-        
-        // Colors for a vibrant neon trail loop
-        const colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3', '#FF00FF'];
 
         for (let i = 0; i < trailLength; i++) {
             const el = document.createElement('div');
             el.className = 'pointer-trail';
-            el.style.backgroundColor = colors[i % colors.length];
+            // Smoothly decrease sizing down the trail line for slither depth
+            el.style.width = (12 - i) + 'px';
+            el.style.height = (12 - i) + 'px';
             el.style.opacity = (1 - (i / trailLength));
             document.body.appendChild(el);
             dots.push({ el, x: 0, y: 0 });
         }
 
-        // Track global coordinates factoring active window scroll layers
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.pageX;
             mouse.y = e.pageY;
@@ -371,9 +409,8 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
             let targetY = mouse.y;
 
             dots.forEach((dot, index) => {
-                // Physics easing formula
-                dot.x += (targetX - dot.x) * 0.3;
-                dot.y += (targetY - dot.y) * 0.3;
+                dot.x += (targetX - dot.x) * 0.35;
+                dot.y += (targetY - dot.y) * 0.35;
                 
                 dot.el.style.left = Math.round(dot.x) + 'px';
                 dot.el.style.top = Math.round(dot.y) + 'px';
@@ -391,7 +428,6 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
         const konamiCode = "arrowuparrowuparrowdownarrowdownleftarrowrightarrowleftarrowrightba";
         
         window.addEventListener('keydown', (e) => {
-            // Keep buffer updated
             inputBuffer += e.key.toLowerCase();
             if (inputBuffer.length > 80) inputBuffer = inputBuffer.substring(inputBuffer.length - 80);
 
