@@ -133,8 +133,8 @@
         /* MONOCHROME OPERATING SYSTEM CURSOR TRAIL STYLE */
         .pointer-trail {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background-color: #333333;
             border: 2px solid #FFFFFF;
             box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
@@ -181,7 +181,7 @@
 <body>
 
     <audio id="bg-midi" loop preload="auto">
-        <source src="https://assets.mixkit.co/active_storage/sfx/123/123-200.wav" type="audio/wav">
+        <source src="loop.mp3" type="audio/mp3">
     </audio>
 
     <div class="search-container">
@@ -244,7 +244,7 @@
                 </table>
 
                 <center>
-                    <small style="color: #666;">幕 Easter Egg Hints: Type <strong>idkfa</strong> or use the classic <strong>Konami Code</strong> on your keyboard...</small>
+                    <small style="color: #666;">🎮 Easter Egg Hints: Type <strong>idkfa</strong> or use the classic <strong>Konami Code</strong> on your keyboard...</small>
                 </center>
                 <br>
 
@@ -362,11 +362,11 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
     </table>
 
     <script>
-        // AUDIO ENGINE CONTROLLER (Bypasses Modern Browser Restrictions)
+        // NATIVE AUDIO ENGINE CONTROLLER 
         function initMidiAudio() {
             const audioObj = document.getElementById('bg-midi');
             audioObj.play().then(() => {
-                alert("Terminal sound pipeline synchronization complete! Synthesizer loop active.");
+                alert("Terminal sound pipeline synchronization complete! Local loop active.");
             }).catch(err => {
                 alert("Audio pipeline warning: Interact with the main window grid first before initializing track engine.");
             });
@@ -376,14 +376,13 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
         setInterval(() => {
             const counterEl = document.getElementById('odometer-counter');
             let currentCount = parseInt(counterEl.innerText);
-            // Simulate random traffic nodes registering connections
             if(Math.random() > 0.7) {
                 currentCount++;
                 counterEl.innerText = String(currentCount).padStart(6, '0');
             }
         }, 3000);
 
-        // HIGH-STABILITY MULTI-CURSOR SNAKE ENGINE (Monochrome Pointer Variant)
+        // MONOCHROME OS CURSOR TRAIL ENGINE (With tracking fixes)
         const trailLength = 10;
         const dots = [];
         const mouse = { x: 0, y: 0 };
@@ -391,7 +390,6 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
         for (let i = 0; i < trailLength; i++) {
             const el = document.createElement('div');
             el.className = 'pointer-trail';
-            // Smoothly decrease sizing down the trail line for slither depth
             el.style.width = (12 - i) + 'px';
             el.style.height = (12 - i) + 'px';
             el.style.opacity = (1 - (i / trailLength));
@@ -400,6 +398,7 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
         }
 
         window.addEventListener('mousemove', (e) => {
+            // Factor in page scrolling offsets dynamically
             mouse.x = e.pageX;
             mouse.y = e.pageY;
         });
