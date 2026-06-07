@@ -5,39 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GRANT National Portal - Destination: Cyberspace</title>
     <style>
-        /* 1998 Industrial NASA Grey Theme */
+        /* === BASE RETRO HARDWARE LAYER === */
+        :root {
+            --bg-color: #C0C0C0;
+            --text-color: #000000;
+            --card-bg: #FFFFFF;
+            --sidebar-bg: #D3D3D3;
+            --right-sidebar-bg: #F5F5F5;
+            --link-color: #0000FF;
+            --header-shadow: #666666;
+            --border-style: ridge;
+            --input-bg: #FFFFFF;
+        }
+
+        /* HOT DOG STAND THEME (Pure 95 Eye Strain) */
+        .theme-hotdog {
+            --bg-color: #FF0000 !important;
+            --text-color: #000000 !important;
+            --card-bg: #FFFF00 !important;
+            --sidebar-bg: #FFFF00 !important;
+            --right-sidebar-bg: #FFFF00 !important;
+            --link-color: #FF0000 !important;
+            --header-shadow: #FF0000 !important;
+            --border-style: solid !important;
+            --input-bg: #FFFFFF !important;
+        }
+
+        /* MATRIX CYBERSPACE MODE */
+        .theme-matrix {
+            --bg-color: #000000 !important;
+            --text-color: #00FF00 !important;
+            --card-bg: #050505 !important;
+            --sidebar-bg: #111111 !important;
+            --right-sidebar-bg: #111111 !important;
+            --link-color: #FFFFFF !important;
+            --header-shadow: #00FF00 !important;
+            --border-style: dashed !important;
+            --input-bg: #000000 !important;
+        }
+
         body {
-            background-color: #C0C0C0; /* Classic 90s OS/Browser Grey */
-            color: #000000;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             font-family: "Times New Roman", Times, serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
-        /* The Custom "NASA-style" Drop-Shadow Header */
+        /* NASA-style Header Layout */
         .nasa-logo {
             font-family: "Arial Black", Gadget, sans-serif;
             font-size: 72px;
             font-weight: 900;
             letter-spacing: 12px;
-            color: #666666;
+            color: var(--header-shadow);
             text-shadow: 3px 3px 0px #FFFFFF, -3px -3px 0px #000000;
             margin: 10px 0 0 0;
             line-height: 1.0;
         }
 
-        /* Fake Search Bar Style */
         .search-container {
             background-color: #000000;
             padding: 5px;
             text-align: right;
             border-bottom: 2px solid #FFFFFF;
         }
-        .search-input {
-            width: 200px;
-            font-family: monospace;
-        }
+        .search-input { width: 200px; font-family: monospace; background-color: #FFF; color: #000; }
         .search-btn {
             background-color: #FFCC00;
             color: #000000;
@@ -46,153 +80,83 @@
             cursor: pointer;
         }
 
-        /* Layout Structure via Tables */
-        .main-layout {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #FFFFFF;
-        }
-        
-        /* Sidebar Styling */
-        .sidebar-left {
-            background-color: #D3D3D3;
-            border-right: 4px double #808080;
-            padding: 15px;
-            width: 210px;
-        }
+        .main-layout { width: 100%; border-collapse: collapse; background-color: var(--card-bg); }
+        .sidebar-left { background-color: var(--sidebar-bg); border-right: 4px double #808080; padding: 15px; width: 210px; }
+        .content-area { padding: 20px; }
+        .sidebar-right { border-left: 2px solid #808080; padding: 15px; width: 180px; background-color: var(--right-sidebar-bg); }
 
-        /* Content Area Styling */
-        .content-area {
-            padding: 20px;
-        }
-
-        /* Right Ad Column Styling */
-        .sidebar-right {
-            border-left: 2px solid #808080;
-            padding: 15px;
-            width: 180px;
-            background-color: #F5F5F5;
-        }
-
-        /* Faux Ad Box Styles */
-        .fake-ad {
-            border: 3px outset #FFFFFF;
-            padding: 8px;
-            margin-bottom: 15px;
-            text-align: center;
-            font-family: "Arial", sans-serif;
-            font-size: 12px;
-        }
+        /* Banner Ads Layout */
+        .fake-ad { border: 3px outset #FFFFFF; padding: 8px; margin-bottom: 15px; text-align: center; font-family: "Arial", sans-serif; font-size: 12px; }
         .ad-red { background-color: #FF0000; color: #FFFFFF; font-weight: bold; }
-        .ad-yellow { background-color: #FFFF00; color: #000000; border: 3px dashed #000000; }
+        .ad-yellow { background-color: #FFFF00; color: #000000; border: 3px dashed #000000; cursor: pointer; }
         .ad-blue { background-color: #000080; color: #FFFFFF; }
 
-        /* Typography & Retro Quirks */
-        h2 {
-            font-family: "Arial", sans-serif;
-            color: #000080;
-            border-bottom: 2px solid #000080;
-            padding-bottom: 3px;
-            margin-top: 0;
-        }
-        a { color: #0000FF; text-decoration: underline; }
-        a:visited { color: #551A8B; }
-        
-        .date-badge {
-            font-family: monospace;
-            font-weight: bold;
-            font-size: 14px;
-            color: #333333;
-            margin-bottom: 15px;
-        }
+        h2 { font-family: "Arial", sans-serif; color: #000080; border-bottom: 2px solid #000080; padding-bottom: 3px; margin-top: 0; }
+        .theme-matrix h2 { color: #00FF00 !important; border-color: #00FF00 !important; }
+        .theme-hotdog h2 { color: #FF0000 !important; border-color: #FF0000 !important; }
 
-        /* MIDI Controller Box */
-        .midi-box {
-            background-color: #C0C0C0;
-            border: 3px outset #FFFFFF;
-            padding: 8px;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            text-align: center;
-            margin-top: 15px;
-        }
+        a { color: var(--link-color); text-decoration: underline; }
+        .date-badge { font-family: monospace; font-weight: bold; font-size: 14px; margin-bottom: 15px; }
+        .midi-box { background-color: #C0C0C0; border: 3px outset #FFFFFF; padding: 8px; font-family: Arial, sans-serif; font-size: 11px; text-align: center; margin-top: 15px; color: #000; }
+        input, textarea, select { background-color: var(--input-bg); border: 2px inset #808080; color: var(--text-color); font-family: monospace; }
+        .retro-counter { background-color: #000000; color: #00FF00; font-family: "Courier New", monospace; font-weight: bold; font-size: 20px; padding: 4px 8px; border: 3px inset #808080; letter-spacing: 3px; display: inline-block; }
 
-        /* Matrix Cheat Mode Style */
-        .matrix-mode {
-            background-color: #000000 !important;
-            color: #00FF00 !important;
-            font-family: "Courier New", monospace !important;
-        }
-        .matrix-mode h2, .matrix-mode h3 {
-            color: #00FF00 !important;
-            border-color: #00FF00 !important;
-        }
-        .matrix-mode a { color: #FFFFFF !important; }
-        .matrix-mode pre { background-color: #111 !important; color: #00FF00 !important; border-color: #00FF00 !important;}
+        /* === CURSOR ENGINE PIXELS === */
+        .pointer-trail { position: absolute; width: 10px; height: 10px; background-color: #333333; border: 2px solid #FFFFFF; box-shadow: 1px 1px 2px rgba(0,0,0,0.5); border-radius: 2px; pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); }
 
-        /* MONOCHROME OPERATING SYSTEM CURSOR TRAIL STYLE */
-        .pointer-trail {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #333333;
-            border: 2px solid #FFFFFF;
-            box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            border-radius: 2px;
-            pointer-events: none;
-            z-index: 99999;
-            transform: translate(-50%, -50%);
-        }
+        /* === NEW ENGINE STYLES: MODALS & BSOD === */
+        .win95-modal-bg { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); z-index:100000; display:flex; align-items:center; justify-content:center; }
+        .win95-modal { background: #C0C0C0; width: 350px; border: 3px outset #FFF; box-shadow: 2px 2px 10px rgba(0,0,0,0.5); padding: 2px; font-family: Arial, sans-serif; color: #000; }
+        .win95-titlebar { background: #000080; color: #FFF; font-weight: bold; padding: 4px 6px; font-size: 13px; display: flex; justify-content: space-between; }
+        .win95-body { padding: 15px; font-size: 13px; text-align: center; }
 
-        /* Ad-Block Proof Rolling Odometer Counter Style */
-        .retro-counter {
-            background-color: #000000;
-            color: #00FF00;
-            font-family: "Courier New", Courier, monospace;
-            font-weight: bold;
-            font-size: 20px;
-            padding: 4px 8px;
-            border: 3px inset #808080;
-            letter-spacing: 3px;
-            display: inline-block;
-            margin-top: 5px;
-        }
+        .bsod-screen { position: fixed; top:0; left:0; width:100%; height:100%; background-color:#0000AA; color:#FFFFFF; font-family: "Courier New", monospace; font-size: 16px; padding: 50px; z-index: 200000; box-sizing: border-box; display: none; cursor: none; }
+        .bsod-center-box { background-color: #C0C0C0; color: #000000; padding: 2px 15px; display: inline-block; font-weight: bold; }
 
-        /* Classic Beveled Input Fields */
-        input, textarea, select {
-            background-color: #FFFFFF;
-            border: 2px inset #808080;
-            color: #000000;
-            font-family: monospace;
-        }
-
-        /* Webring Box Layout */
-        .webring-container {
-            border: 3px double #000080;
-            background-color: #D3D3D3;
-            padding: 10px;
-            margin-top: 25px;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-        }
+        .download-box { border: 2px inset #FFF; background-color: #EAEAEA; padding: 10px; margin-top: 15px; font-family: monospace; font-size: 12px; color: #000; }
+        .progress-bar-bg { background-color: #FFF; border: 2px inset #808080; height: 20px; width: 100%; margin: 8px 0; position: relative; }
+        .progress-bar-fill { background-color: #000080; height: 100%; width: 3%; transition: width 1s linear; }
     </style>
 </head>
-<body>
+<body class="theme-default" id="main-root">
 
     <audio id="bg-midi" loop preload="auto">
         <source src="loop.mp3" type="audio/mp3">
     </audio>
 
+    <div id="mainframe-bsod" class="bsod-screen" onclick="restoreFromBsod()">
+        <center><div class="bsod-center-box">Windows</div></center>
+        <br><br>
+        <p>A fatal exception 0E has occurred at 0137:BF801234. The current application node execution framework has been compromised by an unauthorized payload expansion array.</p>
+        <p>The current application "Grant's Android Project Layout" will be terminated immediately.</p>
+        <br>
+        <p>* Press ANY MOUSE CLICK to restart the browser environment and clear system files.</p>
+        <p>* Check your phone line allocation matrix if errors continue to manifest.</p>
+        <br><br><br>
+        <center><p>Press any click to continue _</p></center>
+    </div>
+
+    <div id="welcome-modal" class="win95-modal-bg">
+        <div class="win95-modal">
+            <div class="win95-titlebar"><span>System Notice</span><span style="cursor:pointer;" onclick="closeWelcomeModal()">⚡</span></div>
+            <div class="win95-body">
+                <span style="font-size:24px; float:left; margin-right:10px;">⚠️</span>
+                <p style="text-align:left; margin:0; padding-top:4px;">High-performance 32-bit architecture detected. Dial-up handshakes are ready to engage.</p>
+                <br>
+                <button onclick="closeWelcomeModal()" style="padding: 3px 15px; background:#C0C0C0; border:2px outset #FFF; font-weight:bold; cursor:pointer;">OK</button>
+            </div>
+        </div>
+    </div>
+
     <div class="search-container">
         <span style="color: #FFFFFF; font-family: Arial; font-size: 12px; margin-right: 10px;">
             🌐 WELCHX-NET: Portal.com | DevDrive | MainframeCity | SourceGate
         </span>
-        <input type="text" class="search-input" id="portal-query" value="Search the WELCHX web...">
-        <button class="search-btn" onclick="alert('Error 405: Cyber-Search engine offline. Please insert floppy disc 2.')">Go Get It!</button>
+        <input type="text" class="search-input" value="Search the WELCHX web...">
+        <button class="search-btn" onclick="triggerBsod()">Go Get It!</button>
     </div>
 
-    <table class="main-layout" id="core-frame">
+    <table class="main-layout">
         <tr>
             <td class="sidebar-left" valign="top">
                 <center>
@@ -201,11 +165,20 @@
                     <div class="date-badge">June 6, 2026</div>
                 </center>
 
-                <p style="font-size: 12px; font-style: italic; border-bottom: 1px solid #808080; padding-bottom: 5px;">
+                <p style="font-size: 12px; font-style: italic; border-bottom: 1px solid #808080; padding-bottom: 5px; color:#000;">
                     "Committed to spreading unique logic pipelines across the global information superhighway."
                 </p>
 
-                <h4 style="margin-bottom: 5px; font-family: Arial;">Navigating The Core:</h4>
+                <div style="margin-bottom:15px; font-family:Arial, sans-serif; font-size:11px; color:#000;">
+                    <strong>🖥️ DISPLAY INTERFACE:</strong><br>
+                    <select id="driver-select" onchange="switchGraphicDriver(this.value)" style="width:100%; margin-top:3px; font-size:11px;">
+                        <option value="default">NASA Industrial</option>
+                        <option value="hotdog">Hot Dog Stand</option>
+                        <option value="matrix">Cyber-Matrix</option>
+                    </select>
+                </div>
+
+                <h4 style="margin-bottom: 5px; font-family: Arial; color:#000;">Navigating The Core:</h4>
                 <p style="margin: 3px 0;"><a href="#about">■ Webmaster Bio</a></p>
                 <p style="margin: 3px 0;"><a href="#projects">■ Software Archive</a></p>
                 <p style="margin: 3px 0;"><a href="#resume">■ RESUME.TXT</a></p>
@@ -220,39 +193,34 @@
                     <button onclick="document.getElementById('bg-midi').pause();" style="font-size:9px; margin-top:5px; cursor:pointer;">MUTE SYSTEM</button>
                 </div>
 
-                <br><br>
-                <h4 style="margin-bottom: 5px; font-family: Arial;">System Badges:</h4>
+                <br>
                 <center>
-                    <div style="border: 3px outset #FFFFFF; background-color: #000080; color: #FFFFFF; font-family: Arial; font-size: 11px; font-weight: bold; padding: 4px; width: 88px; text-align: center; margin-bottom: 10px; line-height: 1.1;">
-                        NETSCAPE<br><span style="color:#FFCC00; font-size:12px;">NOW!</span>
-                    </div>
-                    <div style="border: 3px outset #FFFFFF; background-color: #333333; color: #00FF00; font-family: monospace; font-size: 11px; font-weight: bold; padding: 4px; width: 88px; text-align: center; line-height: 1.1;">
-                        LINUX<br><span style="color:#FFFFFF;">POWERED</span>
-                    </div>
+                    <div style="border: 3px outset #FFFFFF; background-color: #000080; color: #FFFFFF; font-family: Arial; font-size: 11px; font-weight: bold; padding: 4px; width: 88px; text-align: center; margin-bottom: 10px; line-height: 1.1;">NETSCAPE<br><span style="color:#FFCC00; font-size:12px;">NOW!</span></div>
+                    <div style="border: 3px outset #FFFFFF; background-color: #333333; color: #00FF00; font-family: monospace; font-size: 11px; font-weight: bold; padding: 4px; width: 88px; text-align: center; line-height: 1.1;">LINUX<br><span style="color:#FFFFFF;">POWERED</span></div>
                 </center>
             </td>
 
             <td class="content-area" valign="top">
-                
-                <table width="100%" style="border: none; margin-bottom: 20px;">
+                <table width="100%" style="border: none; margin-bottom: 20px; background:none;">
                     <tr>
-                        <td style="border: none; padding: 0;">
+                        <td style="border: none; padding: 0; background:none;">
                             <h1 class="nasa-logo">GRANT</h1>
                             <div style="background: linear-gradient(90deg, #FF0000, #FFFF00, #FF0000); height: 6px; width: 100%; margin-top: 5px;"></div>
                         </td>
                     </tr>
                 </table>
 
-                <center>
-                    <small style="color: #666;">🎮 Easter Egg Hints: Type <strong>idkfa</strong> or use the classic <strong>Konami Code</strong> on your keyboard...</small>
-                </center>
-                <br>
-
                 <h3 style="color: #FF0000; font-family: Arial;">🚀 Mainframe Update: Android Deployment Target Confirmed</h3>
                 <p>
                     <strong>SILICON VALLEY WAY —</strong> Webmaster operations have initiated the terminal steps to broadcast the first official Android application to the global mobile marketplace. Engineers are currently navigating the validation architecture within the Google Play Console ecosystem. Full direct download pathways will manifest on this node upon security clearance.
                 </p>
 
+                <div class="download-box">
+                    <strong style="color:#000080;">📥 PIPELINE TRANSFER MONITOR (v1.0-deploy.apk)</strong><br>
+                    <strong>File Size:</strong> 14.2 Megabytes | <strong>Transfer Protocol:</strong> Dial-Up Sync (56 Kbps)<br>
+                    <div class="progress-bar-bg"><div id="download-fill" class="progress-bar-fill"></div></div>
+                    <span id="download-status">Status: Connecting to network packet arrays...</span>
+                </div>
                 <br>
 
                 <div id="about">
@@ -285,13 +253,13 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
 
                 <br>
 
-                <div id="guestbook" style="border: 2px dashed #000080; background-color: #F9F9F9; padding: 15px;">
+                <div id="guestbook" style="border: 2px dashed #000080; background-color: #F9F9F9; padding: 15px; color:#000;">
                     <h2 style="border: none; color: #FF00FF;">✍️ Sign My Cyber-Guestbook</h2>
                     <form onsubmit="alert('Thank you for signing! Your entry has been transmitted to a 3.5 inch floppy disk.'); this.reset(); return false;">
                         <table style="width: 100%; border: none; background: none;">
-                            <tr style="border:none;"><td style="border:none; width:80px;">Handle:</td><td style="border:none;"><input type="text" style="width: 90%;" required placeholder="e.g., CyberRider99"></td></tr>
-                            <tr style="border:none;"><td style="border:none;">Message:</td><td style="border:none;"><textarea style="width: 90%; height: 50px;" required placeholder="Drop some cool text here..."></textarea></td></tr>
-                            <tr style="border:none;"><td style="border:none;"></td><td style="border:none;"><input type="submit" value="SUBMIT TO MAINFRAME" style="font-weight: bold; background-color: #C0C0C0; padding: 4px; cursor: pointer;"></td></tr>
+                            <tr style="border:none;"><td style="border:none; width:80px; color:#000;">Handle:</td><td style="border:none;"><input type="text" style="width: 90%;" required placeholder="e.g., CyberRider99"></td></tr>
+                            <tr style="border:none;"><td style="border:none; color:#000;">Message:</td><td style="border:none;"><textarea style="width: 90%; height: 50px;" required placeholder="Drop some cool text here..."></textarea></td></tr>
+                            <tr style="border:none;"><td style="border:none;"></td><td style="border:none;"><input type="submit" value="SUBMIT TO MAINFRAME" style="font-weight: bold; background-color: #C0C0C0; padding: 4px; cursor: pointer; color:#000;"></td></tr>
                         </table>
                     </form>
                 </div>
@@ -301,43 +269,37 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
                 <div id="privacy">
                     <h2>Security Compliance / Privacy Policy</h2>
                     <p>This web node utilizes zero client-side storage, cookie injections, or external telemetric script trackers. Complete isolation protocols are enforced. Secure encryption pathways may be engaged once the certificate authority clears the handshake queue.</p>
-                    <p>Direct electronic feedback transmissions to the official exchange terminal: 
-                        <a href="mailto:grant@welchx.com">⚡ grant@welchx.com ⚡</a>
-                    </p>
+                    <p>Direct electronic feedback transmissions to the official exchange terminal: <a href="mailto:grant@welchx.com">⚡ grant@welchx.com ⚡</a></p>
                 </div>
 
-                <div class="webring-container">
+                <div class="webring-container" style="color:#000;">
                     <strong>🕸️ HUB OF THE DEVELOPER WEBRING MATRIX 🕸️</strong><br>
                     <span style="font-size: 11px;">You are currently anchored at node <strong>[welchx.com]</strong></span><br style="margin-bottom: 5px;">
                     <a href="#" onclick="alert('Travelling backwards in time...'); return false;">[ Skip Prev ]</a> | 
                     <a href="#" onclick="alert('Error 501: Next developer node skipped its web host bill.'); return false;">[ Random Node ]</a> | 
                     <a href="#" onclick="alert('Stepping forward along the highway...'); return false;">[ Skip Next ]</a>
                 </div>
-
             </td>
 
             <td class="sidebar-right" valign="top">
-                
                 <div style="border:2px inset #FFFFFF; background-color:#000000; color:#00FF00; font-family:monospace; padding:8px; font-size:11px; margin-bottom:15px;">
                     <center>
                         <span style="color:#FFFF00; font-weight:bold;">🛰️ CYBER-WEATHER</span><br>
                         <span style="font-size:9px; color:#AAA;">Sector: Citrus Heights, CA</span><br>
                         <span style="font-size:28px; margin:2px 0; display:block;">☀️</span>
-                        <strong>CURRENT COND:</strong><br>
-                        Clear Sky / Fair<br>
+                        <strong>CURRENT COND:</strong><br>Clear Sky / Fair<br>
                         <strong>TEMP:</strong> 74°F / 23°C<br>
                         <strong>HUMIDITY:</strong> 42%<br>
-                        <span style="font-size:9px; color:#00FFFF; display:block; margin-top:4px;">[SATELLITE SYNC OK]</span>
                     </center>
                 </div>
 
                 <center><span style="font-size: 10px; font-family: Arial; color: #666666;">- SPONSORED LINKS -</span></center>
                 <br>
 
-                <div class="fake-ad ad-yellow">
+                <div class="fake-ad ad-yellow" onclick="triggerBsod()">
                     <span style="font-size: 14px; font-weight: bold; color: #FF0000;">⚡ UPGRADE NOW! ⚡</span><br><br>
                     Get <strong>10 MEGABYTES</strong> of Raw Web Power Free!<br><br>
-                    <span style="font-size: 10px;">Host your entire digital life on a single floppy disc!</span>
+                    <span style="font-size: 10px; text-decoration: underline;">Click to download configuration utility matrix directly.</span>
                 </div>
 
                 <div class="fake-ad ad-red">
@@ -353,7 +315,7 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
 
                 <br>
                 <center>
-                    <span style="font-size: 11px; font-family: Arial;">Site Status:</span><br>
+                    <span style="font-size: 11px; font-family: Arial; color:#000;">Site Status:</span><br>
                     <div class="retro-counter" id="odometer-counter">007432</div>
                     <p style="font-size: 10px; color: #666666; line-height: 1.2;">Best viewed with a 56k dial-up modem. Do not pick up the house telephone.</p>
                 </center>
@@ -362,91 +324,127 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
     </table>
 
     <script>
-        // NATIVE AUDIO ENGINE CONTROLLER 
+        // AUDIO PIPELINE SWITCH ENGINE
         function initMidiAudio() {
             const audioObj = document.getElementById('bg-midi');
             audioObj.play().then(() => {
-                alert("Terminal sound pipeline synchronization complete! Local loop active.");
+                alert("Terminal sound pipeline synchronization complete! 56k dialup initialization handshake engaged loop.");
             }).catch(err => {
-                alert("Audio pipeline warning: Interact with the main window grid first before initializing track engine.");
+                alert("Audio injection failure: Interact with the central document page node matrix to clear internal security paths.");
             });
         }
 
-        // DYNAMIC COUNTER TICKER ENGINE
+        // INITIAL LOADING WINDOW CLOSURE
+        function closeWelcomeModal() {
+            document.getElementById('welcome-modal').style.display = 'none';
+        }
+
+        // HARDWARE THEME SKIN ACCELERATOR DRIVER
+        function switchGraphicDriver(styleValue) {
+            const elementTarget = document.getElementById('main-root');
+            elementTarget.className = ""; // Wipe active configuration sets
+            if(styleValue !== 'default') {
+                elementTarget.classList.add('theme-' + styleValue);
+            }
+        }
+
+        // SYSTEM INTENT EVENT: WINDOWS BLUE SCREEN TRAP
+        function triggerBsod() {
+            document.getElementById('mainframe-bsod').style.display = 'block';
+            document.getElementById('bg-midi').pause(); // Silence handshake during crash arrays
+        }
+        function restoreFromBsod() {
+            document.getElementById('mainframe-bsod').style.display = 'none';
+            alert("Mainframe reboot sequence complete. Files recovered safely from virtual stack registers.");
+        }
+
+        // 56K DOWNLOAD PACKET SIMULATOR PROGRESS Ticker
+        let currentFill = 3;
+        const progressFillEl = document.getElementById('download-fill');
+        const progressStatusEl = document.getElementById('download-status');
+
+        setInterval(() => {
+            if (currentFill < 100) {
+                currentFill += Math.floor(Math.random() * 3) + 1;
+                if (currentFill > 100) currentFill = 100;
+                progressFillEl.style.width = currentFill + '%';
+                
+                if(currentFill < 20) progressStatusEl.innerText = "Status: Performing carrier handshake... (2.4 KB/s)";
+                else if(currentFill < 50) progressStatusEl.innerText = "Status: Downloading allocation maps... Time remaining: 6 hrs 12 mins";
+                else if(currentFill < 85) progressStatusEl.innerText = "Status: Transferring block array blocks... Time remaining: 3 hrs 44 mins";
+                else if(currentFill < 100) progressStatusEl.innerText = "Status: Wrapping terminal manifests... Time remaining: 12 mins";
+                else progressStatusEl.innerText = "Status: Complete! Carrier connection dropped by household telephone interruption error code 0x99.";
+            }
+        }, 1500);
+
+        // ODOMETER COUNTING LOGIC LOGS
         setInterval(() => {
             const counterEl = document.getElementById('odometer-counter');
-            let currentCount = parseInt(counterEl.innerText);
-            if(Math.random() > 0.7) {
-                currentCount++;
-                counterEl.innerText = String(currentCount).padStart(6, '0');
+            let countInt = parseInt(counterEl.innerText);
+            if(Math.random() > 0.6) {
+                countInt++;
+                counterEl.innerText = String(countInt).padStart(6, '0');
             }
-        }, 3000);
+        }, 2500);
 
-        // MONOCHROME OS CURSOR TRAIL ENGINE (With tracking fixes)
+        // MONOCHROME SECTOR PRECISION POSITION MOUSE POINTER ENGINE
         const trailLength = 10;
         const dots = [];
-        const mouse = { x: 0, y: 0 };
+        const mouseCoordinates = { x: 0, y: 0 };
 
         for (let i = 0; i < trailLength; i++) {
             const el = document.createElement('div');
             el.className = 'pointer-trail';
-            el.style.width = (12 - i) + 'px';
-            el.style.height = (12 - i) + 'px';
+            el.style.width = (11 - i) + 'px';
+            el.style.height = (11 - i) + 'px';
             el.style.opacity = (1 - (i / trailLength));
             document.body.appendChild(el);
             dots.push({ el, x: 0, y: 0 });
         }
 
         window.addEventListener('mousemove', (e) => {
-            // Factor in page scrolling offsets dynamically
-            mouse.x = e.pageX;
-            mouse.y = e.pageY;
+            mouseCoordinates.x = e.pageX;
+            mouseCoordinates.y = e.pageY;
         });
 
-        function updateTrail() {
-            let targetX = mouse.x;
-            let targetY = mouse.y;
+        function renderTrailLoop() {
+            let nextTargetX = mouseCoordinates.x;
+            let nextTargetY = mouseCoordinates.y;
 
-            dots.forEach((dot, index) => {
-                dot.x += (targetX - dot.x) * 0.35;
-                dot.y += (targetY - dot.y) * 0.35;
+            dots.forEach((dot) => {
+                dot.x += (nextTargetX - dot.x) * 0.4;
+                dot.y += (nextTargetY - dot.y) * 0.4;
                 
                 dot.el.style.left = Math.round(dot.x) + 'px';
                 dot.el.style.top = Math.round(dot.y) + 'px';
                 
-                targetX = dot.x;
-                targetY = dot.y;
+                nextTargetX = dot.x;
+                nextTargetY = dot.y;
             });
-
-            requestAnimationFrame(updateTrail);
+            requestAnimationFrame(renderTrailLoop);
         }
-        updateTrail();
+        renderTrailLoop();
 
-        // EASTER EGG ENGINE: Doom Code + Full Konami Code Engine
-        let inputBuffer = "";
-        const konamiCode = "arrowuparrowuparrowdownarrowdownleftarrowrightarrowleftarrowrightba";
-        
+        // ADDITIONAL EASTER EGG REGISTERS: Cheat codes sequences tracker
+        let keyHistory = "";
+        const konamiSequence = "arrowuparrowuparrowdownarrowdownleftarrowrightarrowleftarrowrightba";
+
         window.addEventListener('keydown', (e) => {
-            inputBuffer += e.key.toLowerCase();
-            if (inputBuffer.length > 80) inputBuffer = inputBuffer.substring(inputBuffer.length - 80);
+            keyHistory += e.key.toLowerCase();
+            if (keyHistory.length > 70) keyHistory = keyHistory.substring(keyHistory.length - 70);
 
-            // 1. Doom Code
-            if (inputBuffer.endsWith("idkfa")) {
-                alert("✨ CHEAT CODE ENGAGED: OVERRIDING THE CORE GRID MATRIX! ✨");
-                document.getElementById('core-frame').classList.toggle('matrix-mode');
+            if (keyHistory.endsWith("idkfa")) {
+                alert("✨ CHEAT CODE ENGAGED: SELECTING MATRIX LAYER DIRECTLY! ✨");
+                document.getElementById('driver-select').value = 'matrix';
+                switchGraphicDriver('matrix');
             }
 
-            // 2. Full Konami Code
-            if (inputBuffer.endsWith(konamiCode)) {
-                alert("🎮 UNLOCKED: 30 LIVES ADDED TO GRAND DEVELOPER CORE! MAIN ENGINE OVERCLOCK ENABLED!");
+            if (keyHistory.endsWith(konamiSequence)) {
+                alert("🎮 UNLOCKED: 30 LIVES ADDED TO CORE MEMORY! SYSTEM FLIPPED!");
                 document.body.style.transform = "rotate(180deg)";
-                setTimeout(() => { 
-                    document.body.style.transform = "none"; 
-                    alert("Gravity matrix restored.");
-                }, 5000);
+                setTimeout(() => { document.body.style.transform = "none"; }, 4000);
             }
         });
     </script>
-
 </body>
 </html>
