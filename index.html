@@ -12,6 +12,7 @@
             font-family: "Times New Roman", Times, serif;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
         /* The Custom "NASA-style" Drop-Shadow Header */
@@ -57,7 +58,7 @@
             background-color: #D3D3D3;
             border-right: 4px double #808080;
             padding: 15px;
-            width: 200px;
+            width: 210px;
         }
 
         /* Content Area Styling */
@@ -94,7 +95,7 @@
             padding-bottom: 3px;
             margin-top: 0;
         }
-        a { color: #0000FF; }
+        a { color: #0000FF; text-decoration: underline; }
         a:visited { color: #551A8B; }
         
         .date-badge {
@@ -108,8 +109,8 @@
         /* MIDI Controller Box */
         .midi-box {
             background-color: #C0C0C0;
-            border: 2px outset #FFFFFF;
-            padding: 5px;
+            border: 3px outset #FFFFFF;
+            padding: 8px;
             font-family: Arial, sans-serif;
             font-size: 11px;
             text-align: center;
@@ -127,46 +128,61 @@
             border-color: #00FF00 !important;
         }
         .matrix-mode a { color: #FFFFFF !important; }
+        .matrix-mode pre { background-color: #111 !important; color: #00FF00 !important; border-color: #00FF00 !important;}
 
-        /* MULTI-CURSOR TRAIL CSS */
+        /* MULTI-CURSOR TRAIL CSS - Custom vector data to prevent broken images */
         .pointer-trail {
             position: absolute;
-            width: 12px;
-            height: 19px;
-            background-image: url('https://web.archive.org/web/20091027051319/http://geocities.com/SiliconValley/Way/1172/cursor.gif');
-            background-size: contain;
-            background-repeat: no-repeat;
+            width: 14px;
+            height: 14px;
+            background-color: #FF00FF;
+            border-radius: 50%;
+            border: 1px solid #FFFFFF;
             pointer-events: none;
             z-index: 99999;
-            transform: translate(0, 0);
-            transition: transform 0.05s ease-out;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Classic Beveled Input Fields */
+        input, textarea, select {
+            background-color: #FFFFFF;
+            border: 2px inset #808080;
+            color: #000000;
+            font-family: monospace;
+        }
+
+        /* Webring Box Layout */
+        .webring-container {
+            border: 3px double #000080;
+            background-color: #D3D3D3;
+            padding: 10px;
+            margin-top: 25px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Hidden audio element for authentic 90s MIDI looping background music -->
-    <audio id="bg-midi" loop>
-        <source src="https://web.archive.org/web/20040619022634ms_/http://www.geocities.com/Hollywood/Hills/9151/dancemix.mid" type="audio/midi">
+    <audio id="bg-midi" loop preload="auto">
+        <source src="https://ia600301.us.archive.org/29/items/milieu_midi_collection/kirby.mp3" type="audio/mp3">
     </audio>
 
-    <!-- Top Navigation & Fake Search Bar Portal -->
     <div class="search-container">
         <span style="color: #FFFFFF; font-family: Arial; font-size: 12px; margin-right: 10px;">
             🌐 WELCHX-NET: Portal.com | DevDrive | MainframeCity | SourceGate
         </span>
-        <input type="text" class="search-input" value="Search the WELCHX web...">
+        <input type="text" class="search-input" id="portal-query" value="Search the WELCHX web...">
         <button class="search-btn" onclick="alert('Error 405: Cyber-Search engine offline. Please insert floppy disc 2.')">Go Get It!</button>
     </div>
 
-    <!-- Main Table Container -->
     <table class="main-layout" id="core-frame">
         <tr>
-            <!-- LEFT COLUMN: Navigation Sidebar (NASA Style) -->
             <td class="sidebar-left" valign="top">
                 <center>
-                    <!-- Rotating 3D Wireframe Globe Asset -->
-                    <img src="https://web.archive.org/web/20091027053427/http://geocities.com/SiliconValley/Way/1172/world.gif" alt="Global Matrix" width="50">
+                    <div style="font-size: 48px; animation: spin 4s linear infinite; display: inline-block; margin-bottom: 5px;">🪐</div>
+                    <style>@keyframes spin { 100% { transform: rotate(360deg); } }</style>
                     <div class="date-badge">June 6, 2026</div>
                 </center>
 
@@ -178,43 +194,41 @@
                 <p style="margin: 3px 0;"><a href="#about">■ Webmaster Bio</a></p>
                 <p style="margin: 3px 0;"><a href="#projects">■ Software Archive</a></p>
                 <p style="margin: 3px 0;"><a href="#resume">■ RESUME.TXT</a></p>
+                <p style="margin: 3px 0;"><a href="#guestbook">■ Sign Guestbook</a></p>
                 <p style="margin: 3px 0;"><a href="#privacy">■ Legal & Privacy</a></p>
 
-                <!-- MIDI Audio Control Deck -->
                 <div class="midi-box">
                     <strong>🎛️ CYBER-AUDIO DECK</strong><br>
-                    <button onclick="document.getElementById('bg-midi').play()" style="font-size:10px;">PLAY</button>
-                    <button onclick="document.getElementById('bg-midi').pause()" style="font-size:10px;">PAUSE</button>
-                    <br><span style="font-size:9px; color:#555;">Track: loop.mid</span>
+                    <span style="font-size: 9px; color: #FF0000; font-weight: bold; display: block; margin-bottom: 4px;">[SOUND ENABLED]</span>
+                    <button onclick="document.getElementById('bg-midi').play();" style="font-size:10px; font-weight:bold; cursor:pointer;">PLAY</button>
+                    <button onclick="document.getElementById('bg-midi').pause();" style="font-size:10px; cursor:pointer;">PAUSE</button>
+                    <br><span style="font-size:9px; color:#555; display:block; margin-top:3px;">Track: hyper_loop.mp3</span>
                 </div>
 
                 <br><br>
                 <h4 style="margin-bottom: 5px; font-family: Arial;">System Badges:</h4>
                 <center>
-                    <img src="https://web.archive.org/web/20090728131346/http://geocities.com/SiliconValley/Hills/8823/netscape.gif" alt="Netscape Now!" width="88"><br><br>
-                    <img src="https://web.archive.org/web/20091027060505/http://geocities.com/SiliconValley/Haven/4143/linuxnow.gif" alt="Linux Now!" width="88">
+                    <img src="https://ia801309.us.archive.org/21/items/netscape-now-badge/netscapenow.gif" alt="Netscape Now!" width="88" style="border: 1px solid #000;"><br><br>
+                    <img src="https://ia800103.us.archive.org/17/items/linux-now-badge/linuxnow.gif" alt="Linux Now!" width="88" style="border: 1px solid #000;">
                 </center>
             </td>
 
-            <!-- MIDDLE COLUMN: Core Page Content -->
             <td class="content-area" valign="top">
                 
-                <!-- Main Header Text Grid -->
                 <table width="100%" style="border: none; margin-bottom: 20px;">
                     <tr>
                         <td style="border: none; padding: 0;">
                             <h1 class="nasa-logo">GRANT</h1>
-                            <img src="https://web.archive.org/web/20090829202613/http://geocities.com/SiliconValley/Lakes/9944/ani_fireline.gif" alt="Laser Divider" style="width:100%; height:15px;">
+                            <div style="background: linear-gradient(90deg, #FF0000, #FFFF00, #FF0000); height: 6px; width: 100%; margin-top: 5px;"></div>
                         </td>
                     </tr>
                 </table>
 
                 <center>
-                    <small style="color: #666;">💡 Easter Egg Hint: Type the classic retro code <strong>idkfa</strong> on your keyboard...</small>
+                    <small style="color: #666;">🎮 Easter Egg Hints: Type <strong>idkfa</strong> or use the classic <strong>Konami Code</strong> on your keyboard...</small>
                 </center>
                 <br>
 
-                <!-- Main Announcement Block -->
                 <h3 style="color: #FF0000; font-family: Arial;">🚀 Mainframe Update: Android Deployment Target Confirmed</h3>
                 <p>
                     <strong>SILICON VALLEY WAY —</strong> Webmaster operations have initiated the terminal steps to broadcast the first official Android application to the global mobile marketplace. Engineers are currently navigating the validation architecture within the Google Play Console ecosystem. Full direct download pathways will manifest on this node upon security clearance.
@@ -252,107 +266,118 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
 
                 <br>
 
+                <div id="guestbook" style="border: 2px dashed #000080; background-color: #F9F9F9; padding: 15px;">
+                    <h2 style="border: none; color: #FF00FF;">✍️ Sign My Cyber-Guestbook</h2>
+                    <form onsubmit="alert('Thank you for signing! Your entry has been transmitted to a 3.5 inch floppy disk.'); this.reset(); return false;">
+                        <table style="width: 100%; border: none; background: none;">
+                            <tr style="border:none;"><td style="border:none; width:80px;">Handle:</td><td style="border:none;"><input type="text" style="width: 90%;" required placeholder="e.g., CyberRider99"></td></tr>
+                            <tr style="border:none;"><td style="border:none;">Message:</td><td style="border:none;"><textarea style="width: 90%; height: 50px;" required placeholder="Drop some cool text here..."></textarea></td></tr>
+                            <tr style="border:none;"><td style="border:none;"></td><td style="border:none;"><input type="submit" value="SUBMIT TO MAINFRAME" style="font-weight: bold; background-color: #C0C0C0; padding: 4px; cursor: pointer;"></td></tr>
+                        </table>
+                    </form>
+                </div>
+
+                <br>
+
                 <div id="privacy">
                     <h2>Security Compliance / Privacy Policy</h2>
                     <p>This web node utilizes zero client-side storage, cookie injections, or external telemetric script trackers. Complete isolation protocols are enforced. Secure encryption pathways may be engaged once the certificate authority clears the handshake queue.</p>
                     <p>Direct electronic feedback transmissions to the official exchange terminal: 
-                        <a href="mailto:grant@welchx.com">
-                            <img src="https://web.archive.org/web/20091027083020/http://hk.geocities.com/miz_vampire/email1.gif" alt="Spinning Mail" style="vertical-align:middle; border:none;"> grant@welchx.com
-                        </a>
+                        <a href="mailto:grant@welchx.com">⚡ grant@welchx.com ⚡</a>
                     </p>
+                </div>
+
+                <div class="webring-container">
+                    <strong>🕸️ HUB OF THE DEVELOPER WEBRING MATRIX 🕸️</strong><br>
+                    <span style="font-size: 11px;">You are currently anchored at node <strong>[welchx.com]</strong></span><br style="margin-bottom: 5px;">
+                    <a href="#" onclick="alert('Travelling backwards in time...'); return false;">[ Skip Prev ]</a> | 
+                    <a href="#" onclick="alert('Error 501: Next developer node skipped its web host bill.'); return false;">[ Random Node ]</a> | 
+                    <a href="#" onclick="alert('Stepping forward along the highway...'); return false;">[ Skip Next ]</a>
                 </div>
 
             </td>
 
-            <!-- RIGHT COLUMN: The Funny Fake 90s Banner Advertisements & Weather -->
             <td class="sidebar-right" valign="top">
                 
-                <!-- 1998 WEATHER RADAR SECTOR -->
                 <div style="border:2px inset #FFFFFF; background-color:#000000; color:#00FF00; font-family:monospace; padding:8px; font-size:11px; margin-bottom:15px;">
                     <center>
                         <span style="color:#FFFF00; font-weight:bold;">🛰️ CYBER-WEATHER</span><br>
                         <span style="font-size:9px; color:#AAA;">Sector: Citrus Heights, CA</span><br>
-                        <span style="font-size:24px; margin:5px 0; display:block;">☀️</span>
+                        <span style="font-size:28px; margin:2px 0; display:block;">☀️</span>
                         <strong>CURRENT COND:</strong><br>
                         Clear Sky / Fair<br>
                         <strong>TEMP:</strong> 74°F / 23°C<br>
                         <strong>HUMIDITY:</strong> 42%<br>
-                        <strong>BAROMETER:</strong> 29.92 IN<br>
-                        <span style="font-size:9px; color:#00FFFF;">[RADAR LINK OFFLINE]</span>
+                        <span style="font-size:9px; color:#00FFFF; display:block; margin-top:4px;">[SATELLITE SYNC OK]</span>
                     </center>
                 </div>
 
                 <center><span style="font-size: 10px; font-family: Arial; color: #666666;">- SPONSORED LINKS -</span></center>
                 <br>
 
-                <!-- Ad 1: The Angelfire Free Storage Copycat -->
                 <div class="fake-ad ad-yellow">
                     <span style="font-size: 14px; font-weight: bold; color: #FF0000;">⚡ UPGRADE NOW! ⚡</span><br><br>
                     Get <strong>10 MEGABYTES</strong> of Raw Web Power Free!<br><br>
                     <span style="font-size: 10px;">Host your entire digital life on a single floppy disc!</span>
                 </div>
 
-                <!-- Ad 2: Red "Earn Cash" Mock-up -->
                 <div class="fake-ad ad-red">
                     <span style="font-size: 16px;">EARN CYBER-CASH!</span><br><br>
-                    <a href="mailto:grant@welchx.com" style="color: #FFFF00;">Click Here</a> to mine 0.00001 Bitcoins over the next forty years!
+                    <a href="mailto:grant@welchx.com" style="color: #FFFF00; font-weight: bold;">Click Here</a> to mine 0.00001 Bitcoins over the next forty years!
                 </div>
 
-                <!-- Ad 3: Tech Support Joke Ad -->
                 <div class="fake-ad ad-blue">
                     <span style="font-weight: bold; color: #FFFF00;">⚠️ TERMINAL ERROR? ⚠️</span><br><br>
                     Is your server throwing <em>"Error Executing Child Request"</em>?<br><br>
-                    <strong>[TRY TURNING IT OFF AND ON AGAIN]</strong>
+                    <strong><a href="#" onclick="alert('System Refreshed!'); return false;" style="color: white;">[CLICK TO TURN IT OFF AND ON AGAIN]</a></strong>
                 </div>
 
-                <!-- Ad 4: Hit Counter and Footer Badge -->
                 <br>
                 <center>
                     <span style="font-size: 11px; font-family: Arial;">Site Status:</span><br>
-                    <img src="https://web.archive.org/web/20091027083041/http://hk.geocities.com/miz_vampire/counter.gif" alt="Hit Counter" width="80">
-                    <p style="font-size: 10px; color: #666666;">Best viewed with a 56k dial-up modem. Do not pick up the house telephone.</p>
+                    <img src="https://ia800103.us.archive.org/17/items/linux-now-badge/counter.gif" alt="Hit Counter" width="80">
+                    <p style="font-size: 10px; color: #666666; line-height: 1.2;">Best viewed with a 56k dial-up modem. Do not pick up the house telephone.</p>
                 </center>
             </td>
         </tr>
     </table>
 
-    <!-- CURSOR TRAIL JAVASCRIPT ENGINE -->
     <script>
-        // Generate multiple trailing cursors
-        const trailLength = 8;
+        // HIGH-STABILITY MULTI-CURSOR SNAKE ENGINE
+        const trailLength = 12; // Expanded trail length for cooler slither look
         const dots = [];
+        const mouse = { x: 0, y: 0 };
         
+        // Colors for a vibrant neon trail loop
+        const colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3', '#FF00FF'];
+
         for (let i = 0; i < trailLength; i++) {
             const el = document.createElement('div');
             el.className = 'pointer-trail';
-            // Each version gets progressively more transparent
-            el.style.opacity = (1 - (i / trailLength)) * 0.8;
+            el.style.backgroundColor = colors[i % colors.length];
+            el.style.opacity = (1 - (i / trailLength));
             document.body.appendChild(el);
             dots.push({ el, x: 0, y: 0 });
         }
 
-        let mouseX = 0;
-        let mouseY = 0;
-
+        // Track global coordinates factoring active window scroll layers
         window.addEventListener('mousemove', (e) => {
-            mouseX = e.pageX;
-            mouseY = e.pageY;
+            mouse.x = e.pageX;
+            mouse.y = e.pageY;
         });
 
-        // Frame update rendering loop for snake delay movement behavior
         function updateTrail() {
-            let targetX = mouseX;
-            let targetY = mouseY;
+            let targetX = mouse.x;
+            let targetY = mouse.y;
 
             dots.forEach((dot, index) => {
-                // Introduce fractional delay movement offset
-                dot.x += (targetX - dot.x) * 0.35;
-                dot.y += (targetY - dot.y) * 0.35;
+                // Physics easing formula
+                dot.x += (targetX - dot.x) * 0.3;
+                dot.y += (targetY - dot.y) * 0.3;
                 
-                dot.el.style.left = dot.x + 2 + 'px';
-                dot.el.style.top = dot.y + 2 + 'px';
+                dot.el.style.left = Math.round(dot.x) + 'px';
+                dot.el.style.top = Math.round(dot.y) + 'px';
                 
-                // Next trailing variant follows the current index target
                 targetX = dot.x;
                 targetY = dot.y;
             });
@@ -361,16 +386,29 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
         }
         updateTrail();
 
-        // EASTER EGG ENGINE: Listen for classic cheat code sequence "idkfa"
+        // EASTER EGG ENGINE: Doom Code + Full Konami Code Engine
         let inputBuffer = "";
+        const konamiCode = "arrowuparrowuparrowdownarrowdownleftarrowrightarrowleftarrowrightba";
+        
         window.addEventListener('keydown', (e) => {
+            // Keep buffer updated
             inputBuffer += e.key.toLowerCase();
-            if (inputBuffer.length > 5) {
-                inputBuffer = inputBuffer.substring(inputBuffer.length - 5);
-            }
-            if (inputBuffer === "idkfa") {
+            if (inputBuffer.length > 80) inputBuffer = inputBuffer.substring(inputBuffer.length - 80);
+
+            // 1. Doom Code
+            if (inputBuffer.endsWith("idkfa")) {
                 alert("✨ CHEAT CODE ENGAGED: OVERRIDING THE CORE GRID MATRIX! ✨");
                 document.getElementById('core-frame').classList.toggle('matrix-mode');
+            }
+
+            // 2. Full Konami Code
+            if (inputBuffer.endsWith(konamiCode)) {
+                alert("🎮 UNLOCKED: 30 LIVES ADDED TO GRAND DEVELOPER CORE! MAIN ENGINE OVERCLOCK ENABLED!");
+                document.body.style.transform = "rotate(180deg)";
+                setTimeout(() => { 
+                    document.body.style.transform = "none"; 
+                    alert("Gravity matrix restored.");
+                }, 5000);
             }
         });
     </script>
