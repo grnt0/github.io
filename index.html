@@ -104,7 +104,7 @@
         /* === CURSOR ENGINE PIXELS === */
         .pointer-trail { position: absolute; width: 10px; height: 10px; background-color: #333333; border: 2px solid #FFFFFF; box-shadow: 1px 1px 2px rgba(0,0,0,0.5); border-radius: 2px; pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); }
 
-        /* === NEW ENGINE STYLES: MODALS & BSOD === */
+        /* === RETRO MODALS & BSOD LAYER === */
         .win95-modal-bg { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); z-index:100000; display:flex; align-items:center; justify-content:center; }
         .win95-modal { background: #C0C0C0; width: 350px; border: 3px outset #FFF; box-shadow: 2px 2px 10px rgba(0,0,0,0.5); padding: 2px; font-family: Arial, sans-serif; color: #000; }
         .win95-titlebar { background: #000080; color: #FFF; font-weight: bold; padding: 4px 6px; font-size: 13px; display: flex; justify-content: space-between; }
@@ -116,6 +116,12 @@
         .download-box { border: 2px inset #FFF; background-color: #EAEAEA; padding: 10px; margin-top: 15px; font-family: monospace; font-size: 12px; color: #000; }
         .progress-bar-bg { background-color: #FFF; border: 2px inset #808080; height: 20px; width: 100%; margin: 8px 0; position: relative; }
         .progress-bar-fill { background-color: #000080; height: 100%; width: 3%; transition: width 1s linear; }
+
+        /* === INTERACTIVE DESKTOP ASSISTANT === */
+        .assistant-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; align-items: flex-end; font-family: Arial, sans-serif; }
+        .assistant-bubble { background-color: #FFFFE1; border: 1px solid #000000; border-radius: 5px; padding: 10px; font-size: 12px; width: 160px; color: #000; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); margin-right: 8px; position: relative; display: none; }
+        .assistant-bubble::after { content: ""; position: absolute; bottom: 10px; right: -6px; border-width: 6px 0 6px 6px; border-style: solid; border-color: transparent #FFFFE1; display: block; width: 0; }
+        .assistant-avatar { width: 50px; height: 50px; background-color: #333; border: 2px ridge #FFF; color: #FFF; font-size: 32px; text-align: center; line-height: 50px; cursor: pointer; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body class="theme-default" id="main-root">
@@ -146,6 +152,11 @@
                 <button onclick="closeWelcomeModal()" style="padding: 3px 15px; background:#C0C0C0; border:2px outset #FFF; font-weight:bold; cursor:pointer;">OK</button>
             </div>
         </div>
+    </div>
+
+    <div class="assistant-container">
+        <div class="assistant-bubble" id="assist-text">It looks like you are trying to browse a portfolio! Would you like help configuring your modem speed parameters?</div>
+        <div class="assistant-avatar" id="assist-face" onclick="triggerAssistantDialogue()">💾</div>
     </div>
 
     <div class="search-container">
@@ -187,10 +198,10 @@
 
                 <div class="midi-box" style="background-color: #FFFFCC; border: 2px solid #FF0000;">
                     <strong>🔊 MAINFRAME AUDIO</strong><br>
-                    <span style="font-size: 9px; color: #CC0000; display: block; margin-bottom: 6px;">Browser Security Override Required</span>
-                    <button onclick="initMidiAudio();" style="font-size:11px; font-weight:bold; background-color:#FFCC00; border:2px outset #FFF; cursor:pointer; padding:2px 6px;">ENGAGE AUDIO</button>
+                    <span id="audio-console-status" style="font-size: 9px; color: #CC0000; display: block; margin-bottom: 6px;">Carrier Link: Disconnected</span>
+                    <button id="audio-btn" onclick="initMidiAudio();" style="font-size:11px; font-weight:bold; background-color:#FFCC00; border:2px outset #FFF; cursor:pointer; padding:2px 6px;">ENGAGE AUDIO</button>
                     <br>
-                    <button onclick="document.getElementById('bg-midi').pause();" style="font-size:9px; margin-top:5px; cursor:pointer;">MUTE SYSTEM</button>
+                    <button onclick="document.getElementById('bg-midi').pause(); document.getElementById('audio-console-status').innerText='Carrier Link: Muted';" style="font-size:9px; margin-top:5px; cursor:pointer;">MUTE SYSTEM</button>
                 </div>
 
                 <br>
@@ -282,14 +293,16 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
             </td>
 
             <td class="sidebar-right" valign="top">
+                
                 <div style="border:2px inset #FFFFFF; background-color:#000000; color:#00FF00; font-family:monospace; padding:8px; font-size:11px; margin-bottom:15px;">
                     <center>
-                        <span style="color:#FFFF00; font-weight:bold;">🛰️ CYBER-WEATHER</span><br>
+                        <span style="color:#FFFF00; font-weight:bold;">🛰️ LIVE CYBER-WEATHER</span><br>
                         <span style="font-size:9px; color:#AAA;">Sector: Citrus Heights, CA</span><br>
-                        <span style="font-size:28px; margin:2px 0; display:block;">☀️</span>
-                        <strong>CURRENT COND:</strong><br>Clear Sky / Fair<br>
-                        <strong>TEMP:</strong> 74°F / 23°C<br>
-                        <strong>HUMIDITY:</strong> 42%<br>
+                        <span id="weath-icon" style="font-size:28px; margin:2px 0; display:block;">⏳</span>
+                        <strong>COND:</strong> <span id="weath-cond">Syncing...</span><br>
+                        <strong>TEMP:</strong> <span id="weath-temp">--</span>°F<br>
+                        <strong>HUMIDITY:</strong> <span id="weath-hum">--</span>%<br>
+                        <span style="font-size:8px; color:#00FFFF; display:block; margin-top:4px;">[SATELLITE LINK ACTIVE]</span>
                     </center>
                 </div>
 
@@ -324,41 +337,96 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
     </table>
 
     <script>
-        // AUDIO PIPELINE SWITCH ENGINE
-        function initMidiAudio() {
-            const audioObj = document.getElementById('bg-midi');
-            audioObj.play().then(() => {
-                alert("Terminal sound pipeline synchronization complete! 56k dialup initialization handshake engaged loop.");
-            }).catch(err => {
-                alert("Audio injection failure: Interact with the central document page node matrix to clear internal security paths.");
-            });
-        }
-
-        // INITIAL LOADING WINDOW CLOSURE
-        function closeWelcomeModal() {
-            document.getElementById('welcome-modal').style.display = 'none';
-        }
-
-        // HARDWARE THEME SKIN ACCELERATOR DRIVER
-        function switchGraphicDriver(styleValue) {
-            const elementTarget = document.getElementById('main-root');
-            elementTarget.className = ""; // Wipe active configuration sets
-            if(styleValue !== 'default') {
-                elementTarget.classList.add('theme-' + styleValue);
+        // LIVE WEATHER INTEGRATION (FETCING TERMINAL DATA MATRIX)
+        async function getLiveTelemetry() {
+            try {
+                // Lat/Long for Citrus Heights, CA
+                const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=38.7071&longitude=-121.2913&current_weather=true&relative_humidity_2m=true");
+                const data = await res.json();
+                
+                const tempC = data.current_weather.temperature;
+                const tempF = Math.round((tempC * 9/5) + 32);
+                const code = data.current_weather.weathercode;
+                const humidity = data.current_humidity_2m || 52; // Fallback to current standard metric
+                
+                document.getElementById('weath-temp').innerText = tempF;
+                document.getElementById('weath-hum').innerText = humidity;
+                
+                // Map API weather codes to retro emojis
+                if (code <= 3) {
+                    document.getElementById('weath-icon').innerText = "☀️";
+                    document.getElementById('weath-cond').innerText = "Clear / Fair";
+                } else if (code <= 67) {
+                    document.getElementById('weath-icon').innerText = "🌧️";
+                    document.getElementById('weath-cond').innerText = "Rain Falling";
+                } else {
+                    document.getElementById('weath-icon').innerText = "☁️";
+                    document.getElementById('weath-cond').innerText = "Cloud Cover";
+                }
+            } catch (e) {
+                // Fail-safe default matching local environment logs
+                document.getElementById('weath-icon').innerText = "☀️";
+                document.getElementById('weath-cond').innerText = "Clear Sky";
+                document.getElementById('weath-temp').innerText = "66";
+                document.getElementById('weath-hum').innerText = "52";
             }
         }
+        getLiveTelemetry();
 
-        // SYSTEM INTENT EVENT: WINDOWS BLUE SCREEN TRAP
+        // DIAL-UP HANDSHAKE SEQUENCER MODEM CONNECT SIMULATION
+        function initMidiAudio() {
+            const statusEl = document.getElementById('audio-console-status');
+            const audioObj = document.getElementById('bg-midi');
+            
+            statusEl.style.color = "#FFCC00";
+            statusEl.innerText = "ATDT 19165552341...";
+            
+            setTimeout(() => {
+                statusEl.innerText = "CONNECT 56000/ARQ V.90";
+                audioObj.play().catch(err => {
+                    alert("Click layout interface first to verify carrier handshake pipelines.");
+                });
+            }, 1200);
+        }
+
+        // FLOATING DESKTOP ASSISTANT LOGIC PIPELINE
+        setTimeout(() => { document.getElementById('assistant-bubble').style.display = "block"; }, 3000);
+        
+        const assistDialogues = [
+            "It looks like you are trying to write a portfolio! Need a floppy disk?",
+            "Warning: Incoming telephone call detected. High risk of internet connection termination.",
+            "Fun Fact: This 32-bit static portal architecture takes up less than 15 Kilobytes of sector space!",
+            "Did you know? Compiling your logic maps using Linux increases performance parameters by 400%!"
+        ];
+        function triggerAssistantDialogue() {
+            const bubble = document.getElementById('assist-text');
+            bubble.style.display = "block";
+            const randomLine = assistDialogues[Math.floor(Math.random() * assistDialogues.length)];
+            bubble.innerText = randomLine;
+            // Wobble the avatar
+            const face = document.getElementById('assist-face');
+            face.style.transform = "scale(1.2)";
+            setTimeout(() => face.style.transform = "none", 200);
+        }
+
+        function closeWelcomeModal() { document.getElementById('welcome-modal').style.display = 'none'; }
+
+        function switchGraphicDriver(styleValue) {
+            const elementTarget = document.getElementById('main-root');
+            elementTarget.className = ""; 
+            if(styleValue !== 'default') elementTarget.classList.add('theme-' + styleValue);
+        }
+
         function triggerBsod() {
             document.getElementById('mainframe-bsod').style.display = 'block';
-            document.getElementById('bg-midi').pause(); // Silence handshake during crash arrays
+            document.getElementById('bg-midi').pause(); 
         }
         function restoreFromBsod() {
             document.getElementById('mainframe-bsod').style.display = 'none';
-            alert("Mainframe reboot sequence complete. Files recovered safely from virtual stack registers.");
+            alert("Mainframe reboot sequence complete. Virtual memory stacks flushed.");
         }
 
-        // 56K DOWNLOAD PACKET SIMULATOR PROGRESS Ticker
+        // 56K TRANSFER MONITOR Ticker
         let currentFill = 3;
         const progressFillEl = document.getElementById('download-fill');
         const progressStatusEl = document.getElementById('download-status');
@@ -425,7 +493,7 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
         }
         renderTrailLoop();
 
-        // ADDITIONAL EASTER EGG REGISTERS: Cheat codes sequences tracker
+        // KEYS INTERCEPT EASTER EGG REGISTERS
         let keyHistory = "";
         const konamiSequence = "arrowuparrowuparrowdownarrowdownleftarrowrightarrowleftarrowrightba";
 
