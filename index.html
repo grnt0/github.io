@@ -104,9 +104,51 @@
             color: #333333;
             margin-bottom: 15px;
         }
+
+        /* MIDI Controller Box */
+        .midi-box {
+            background-color: #C0C0C0;
+            border: 2px outset #FFFFFF;
+            padding: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Matrix Cheat Mode Style */
+        .matrix-mode {
+            background-color: #000000 !important;
+            color: #00FF00 !important;
+            font-family: "Courier New", monospace !important;
+        }
+        .matrix-mode h2, .matrix-mode h3 {
+            color: #00FF00 !important;
+            border-color: #00FF00 !important;
+        }
+        .matrix-mode a { color: #FFFFFF !important; }
+
+        /* MULTI-CURSOR TRAIL CSS */
+        .pointer-trail {
+            position: absolute;
+            width: 12px;
+            height: 19px;
+            background-image: url('https://web.archive.org/web/20091027051319/http://geocities.com/SiliconValley/Way/1172/cursor.gif');
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(0, 0);
+            transition: transform 0.05s ease-out;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Hidden audio element for authentic 90s MIDI looping background music -->
+    <audio id="bg-midi" loop>
+        <source src="https://web.archive.org/web/20040619022634ms_/http://www.geocities.com/Hollywood/Hills/9151/dancemix.mid" type="audio/midi">
+    </audio>
 
     <!-- Top Navigation & Fake Search Bar Portal -->
     <div class="search-container">
@@ -118,13 +160,13 @@
     </div>
 
     <!-- Main Table Container -->
-    <table class="main-layout">
+    <table class="main-layout" id="core-frame">
         <tr>
             <!-- LEFT COLUMN: Navigation Sidebar (NASA Style) -->
             <td class="sidebar-left" valign="top">
                 <center>
-                    <!-- Classic 90s Planet/Space Graphic Vibe -->
-                    <span style="font-size: 40px;">🪐</span>
+                    <!-- Rotating 3D Wireframe Globe Asset -->
+                    <img src="https://web.archive.org/web/20091027053427/http://geocities.com/SiliconValley/Way/1172/world.gif" alt="Global Matrix" width="50">
                     <div class="date-badge">June 6, 2026</div>
                 </center>
 
@@ -137,6 +179,14 @@
                 <p style="margin: 3px 0;"><a href="#projects">■ Software Archive</a></p>
                 <p style="margin: 3px 0;"><a href="#resume">■ RESUME.TXT</a></p>
                 <p style="margin: 3px 0;"><a href="#privacy">■ Legal & Privacy</a></p>
+
+                <!-- MIDI Audio Control Deck -->
+                <div class="midi-box">
+                    <strong>🎛️ CYBER-AUDIO DECK</strong><br>
+                    <button onclick="document.getElementById('bg-midi').play()" style="font-size:10px;">PLAY</button>
+                    <button onclick="document.getElementById('bg-midi').pause()" style="font-size:10px;">PAUSE</button>
+                    <br><span style="font-size:9px; color:#555;">Track: loop.mid</span>
+                </div>
 
                 <br><br>
                 <h4 style="margin-bottom: 5px; font-family: Arial;">System Badges:</h4>
@@ -154,10 +204,15 @@
                     <tr>
                         <td style="border: none; padding: 0;">
                             <h1 class="nasa-logo">GRANT</h1>
-                            <hr size="4" color="#000080" style="margin-top: 5px;">
+                            <img src="https://web.archive.org/web/20090829202613/http://geocities.com/SiliconValley/Lakes/9944/ani_fireline.gif" alt="Laser Divider" style="width:100%; height:15px;">
                         </td>
                     </tr>
                 </table>
+
+                <center>
+                    <small style="color: #666;">💡 Easter Egg Hint: Type the classic retro code <strong>idkfa</strong> on your keyboard...</small>
+                </center>
+                <br>
 
                 <!-- Main Announcement Block -->
                 <h3 style="color: #FF0000; font-family: Arial;">🚀 Mainframe Update: Android Deployment Target Confirmed</h3>
@@ -200,13 +255,33 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
                 <div id="privacy">
                     <h2>Security Compliance / Privacy Policy</h2>
                     <p>This web node utilizes zero client-side storage, cookie injections, or external telemetric script trackers. Complete isolation protocols are enforced. Secure encryption pathways may be engaged once the certificate authority clears the handshake queue.</p>
-                    <p>Direct electronic feedback transmissions to the official exchange terminal: <a href="mailto:grant@welchx.com">grant@welchx.com</a></p>
+                    <p>Direct electronic feedback transmissions to the official exchange terminal: 
+                        <a href="mailto:grant@welchx.com">
+                            <img src="https://web.archive.org/web/20091027083020/http://hk.geocities.com/miz_vampire/email1.gif" alt="Spinning Mail" style="vertical-align:middle; border:none;"> grant@welchx.com
+                        </a>
+                    </p>
                 </div>
 
             </td>
 
-            <!-- RIGHT COLUMN: The Funny Fake 90s Banner Advertisements -->
+            <!-- RIGHT COLUMN: The Funny Fake 90s Banner Advertisements & Weather -->
             <td class="sidebar-right" valign="top">
+                
+                <!-- 1998 WEATHER RADAR SECTOR -->
+                <div style="border:2px inset #FFFFFF; background-color:#000000; color:#00FF00; font-family:monospace; padding:8px; font-size:11px; margin-bottom:15px;">
+                    <center>
+                        <span style="color:#FFFF00; font-weight:bold;">🛰️ CYBER-WEATHER</span><br>
+                        <span style="font-size:9px; color:#AAA;">Sector: Citrus Heights, CA</span><br>
+                        <span style="font-size:24px; margin:5px 0; display:block;">☀️</span>
+                        <strong>CURRENT COND:</strong><br>
+                        Clear Sky / Fair<br>
+                        <strong>TEMP:</strong> 74°F / 23°C<br>
+                        <strong>HUMIDITY:</strong> 42%<br>
+                        <strong>BAROMETER:</strong> 29.92 IN<br>
+                        <span style="font-size:9px; color:#00FFFF;">[RADAR LINK OFFLINE]</span>
+                    </center>
+                </div>
+
                 <center><span style="font-size: 10px; font-family: Arial; color: #666666;">- SPONSORED LINKS -</span></center>
                 <br>
 
@@ -240,6 +315,65 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
             </td>
         </tr>
     </table>
+
+    <!-- CURSOR TRAIL JAVASCRIPT ENGINE -->
+    <script>
+        // Generate multiple trailing cursors
+        const trailLength = 8;
+        const dots = [];
+        
+        for (let i = 0; i < trailLength; i++) {
+            const el = document.createElement('div');
+            el.className = 'pointer-trail';
+            // Each version gets progressively more transparent
+            el.style.opacity = (1 - (i / trailLength)) * 0.8;
+            document.body.appendChild(el);
+            dots.push({ el, x: 0, y: 0 });
+        }
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.pageX;
+            mouseY = e.pageY;
+        });
+
+        // Frame update rendering loop for snake delay movement behavior
+        function updateTrail() {
+            let targetX = mouseX;
+            let targetY = mouseY;
+
+            dots.forEach((dot, index) => {
+                // Introduce fractional delay movement offset
+                dot.x += (targetX - dot.x) * 0.35;
+                dot.y += (targetY - dot.y) * 0.35;
+                
+                dot.el.style.left = dot.x + 2 + 'px';
+                dot.el.style.top = dot.y + 2 + 'px';
+                
+                // Next trailing variant follows the current index target
+                targetX = dot.x;
+                targetY = dot.y;
+            });
+
+            requestAnimationFrame(updateTrail);
+        }
+        updateTrail();
+
+        // EASTER EGG ENGINE: Listen for classic cheat code sequence "idkfa"
+        let inputBuffer = "";
+        window.addEventListener('keydown', (e) => {
+            inputBuffer += e.key.toLowerCase();
+            if (inputBuffer.length > 5) {
+                inputBuffer = inputBuffer.substring(inputBuffer.length - 5);
+            }
+            if (inputBuffer === "idkfa") {
+                alert("✨ CHEAT CODE ENGAGED: OVERRIDING THE CORE GRID MATRIX! ✨");
+                document.getElementById('core-frame').classList.toggle('matrix-mode');
+            }
+        });
+    </script>
 
 </body>
 </html>
