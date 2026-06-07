@@ -63,7 +63,7 @@
             text-shadow: 3px 3px 0px #FFFFFF, -3px -3px 0px #000000;
             margin: 10px 0 0 0;
             line-height: 1.0;
-            cursor: pointer; /* Indicates it can be clicked for the system notice egg */
+            cursor: pointer;
         }
 
         .search-container {
@@ -92,7 +92,7 @@
         .ad-yellow { background-color: #FFFF00; color: #000000; border: 3px dashed #000000; cursor: pointer; }
         .ad-blue { background-color: #000080; color: #FFFFFF; }
 
-        h2 { font-family: "Arial", sans-serif; color: #000080; border-bottom: 2px solid #000080; padding-bottom: 3px; margin-top: 0; }
+        h2 { font-family: "Arial", sans-serif; color: #000080; border-bottom: 2px solid #000080; padding-bottom: 3px; margin-top: 25px; }
         .theme-matrix h2 { color: #00FF00 !important; border-color: #00FF00 !important; }
         .theme-hotdog h2 { color: #FF0000 !important; border-color: #FF0000 !important; }
 
@@ -124,19 +124,20 @@
         .assistant-bubble::after { content: ""; position: absolute; bottom: 10px; right: -6px; border-width: 6px 0 6px 6px; border-style: solid; border-color: transparent #FFFFE1; display: block; width: 0; }
         .assistant-avatar { width: 50px; height: 50px; background-color: #333; border: 2px ridge #FFF; color: #FFF; font-size: 32px; text-align: center; line-height: 50px; cursor: pointer; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); user-select: none; }
         
-        /* Bouncing animation just for the Initial Beacon State */
         .bounce-active { animation: assistant-bounce 0.5s infinite alternate; }
         @keyframes assistant-bounce { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+
+        /* Faux Screenshot Box Styles */
+        .screenshot-grid { display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        .faux-screenshot { width: 140px; height: 220px; background-color: #000000; border: 3px inset #FFFFFF; display: flex; align-items: center; justify-content: center; color: #00FF00; font-family: monospace; font-size: 11px; text-align: center; padding: 5px; box-sizing: border-box; }
     </style>
 </head>
 <body class="theme-default" id="main-root">
 
-    <!-- THE 56K HANDSHAKE SOUND CORE -->
     <audio id="bg-midi" loop preload="auto">
         <source src="loop.mp3" type="audio/mp3">
     </audio>
 
-    <!-- FULL SCREEN BSOD WINDOW CONSOLE -->
     <div id="mainframe-bsod" class="bsod-screen" onclick="restoreFromBsod()">
         <center><div class="bsod-center-box">Windows</div></center>
         <br><br>
@@ -149,7 +150,6 @@
         <center><p>Press any click to continue _</p></center>
     </div>
 
-    <!-- HIDDEN ALERT DIALOG MODAL (Now only triggers via clicking the header name) -->
     <div id="welcome-modal" class="win95-modal-bg">
         <div class="win95-modal">
             <div class="win95-titlebar"><span>System Notice</span><span style="cursor:pointer;" onclick="closeWelcomeModal()">⚡</span></div>
@@ -162,25 +162,21 @@
         </div>
     </div>
 
-    <!-- FLOATING DESKTOP ASSISTANT GRAPHIC -->
     <div class="assistant-container">
         <div class="assistant-bubble" id="assist-bubble">Click me!</div>
         <div class="assistant-avatar bounce-active" id="assist-avatar" onclick="triggerAssistantDialogue()">💾</div>
     </div>
 
-    <!-- Top Navigation Portal Layout -->
     <div class="search-container">
         <span style="color: #FFFFFF; font-family: Arial; font-size: 12px; margin-right: 10px;">
             🌐 WELCHX-NET: Portal.com | DevDrive | MainframeCity | SourceGate
         </span>
         <input type="text" class="search-input" value="Search the WELCHX web...">
-        <button class="search-btn" onclick="triggerBsod()">Go Get It!</button>
+        <button class="search-btn" onclick="triggerBsod()">Go Get It?</button>
     </div>
 
-    <!-- Core Grid Content Table Layout -->
     <table class="main-layout">
         <tr>
-            <!-- LEFT COLUMN: Infrastructure Directories -->
             <td class="sidebar-left" valign="top">
                 <center>
                     <div style="font-size: 48px; animation: spin 4s linear infinite; display: inline-block; margin-bottom: 5px;">🪐</div>
@@ -192,7 +188,6 @@
                     "Committed to spreading unique logic pipelines across the global information superhighway."
                 </p>
 
-                <!-- DISPLAY INTERFACE ACCELERATOR -->
                 <div style="margin-bottom:15px; font-family:Arial, sans-serif; font-size:11px; color:#000;">
                     <strong>🖥️ DISPLAY INTERFACE:</strong><br>
                     <select id="driver-select" onchange="switchGraphicDriver(this.value)" style="width:100%; margin-top:3px; font-size:11px;">
@@ -204,12 +199,12 @@
 
                 <h4 style="margin-bottom: 5px; font-family: Arial; color:#000;">Navigating The Core:</h4>
                 <p style="margin: 3px 0;"><a href="#about">■ Webmaster Bio</a></p>
+                <p style="margin: 3px 0;"><a href="#flux-app">■ Flux Cash Flow</a></p>
                 <p style="margin: 3px 0;"><a href="#projects">■ Software Archive</a></p>
                 <p style="margin: 3px 0;"><a href="#resume">■ RESUME.TXT</a></p>
                 <p style="margin: 3px 0;"><a href="#guestbook">■ Sign Guestbook</a></p>
-                <p style="margin: 3px 0;"><a href="#privacy">■ Legal & Privacy</a></p>
+                <p style="margin: 3px 0;"><a href="#privacy">■ Privacy Policy</a></p>
 
-                <!-- AUDIO OVERRIDE ACCESS UNIT -->
                 <div class="midi-box" style="background-color: #FFFFCC; border: 2px solid #FF0000;">
                     <strong>🔊 MAINFRAME AUDIO</strong><br>
                     <span id="audio-console-status" style="font-size: 9px; color: #CC0000; display: block; margin-bottom: 6px;">Carrier Link: Disconnected</span>
@@ -225,12 +220,10 @@
                 </center>
             </td>
 
-            <!-- MIDDLE COLUMN: Text Modules -->
             <td class="content-area" valign="top">
                 <table width="100%" style="border: none; margin-bottom: 20px; background:none;">
                     <tr>
                         <td style="border: none; padding: 0; background:none;">
-                            <!-- Hidden Easter Egg Trigger: Added onclick window event -->
                             <h1 class="nasa-logo" onclick="openWelcomeModal()">GRANT</h1>
                             <div style="background: linear-gradient(90deg, #FF0000, #FFFF00, #FF0000); height: 6px; width: 100%; margin-top: 5px;"></div>
                         </td>
@@ -242,7 +235,6 @@
                     <strong>SILICON VALLEY WAY —</strong> Webmaster operations have initiated the terminal steps to broadcast the first official Android application to the global mobile marketplace. Engineers are currently navigating the validation architecture within the Google Play Console ecosystem. Full direct download pathways will manifest on this node upon security clearance.
                 </p>
 
-                <!-- THE INTERACTIVE 56K DOWNLOAD ESTIMATOR PROGRESS BAR -->
                 <div class="download-box">
                     <strong style="color:#000080;">📥 PIPELINE TRANSFER MONITOR (v1.0-deploy.apk)</strong><br>
                     <strong>File Size:</strong> 14.2 Megabytes | <strong>Transfer Protocol:</strong> Dial-Up Sync (56 Kbps)<br>
@@ -250,6 +242,37 @@
                     <span id="download-status">Status: Connecting to network packet arrays...</span>
                 </div>
                 <br>
+
+                <div id="flux-app" style="border: 3px double #000080; padding: 15px; background-color: #F9F9F9; margin-bottom: 25px;">
+                    <h2 style="margin-top: 0; border-color: #FF00FF; color: #FF00FF;">📱 Software Showcase: Flux Cash Flow v1.0</h2>
+                    <p><strong>Architecture Strategy: Extreme User Security & Local Analytical Utility.</strong></p>
+                    <p>Flux Cash Flow is engineered entirely for local execution on modern Android targets. It functions as a completely isolated projection module, giving web travelers the ability to chart upcoming capital liquid maps without risk of network telemetry leaks.</p>
+                    
+                    <h4 style="margin-bottom: 5px; font-family: Arial; color: #000080;">Core Operational Specifications:</h4>
+                    <ul>
+                        <li><strong>100% Offline Framework:</strong> Zero account verification scripts required. Operates perfectly in dead zones.</li>
+                        <li><strong>Absolute Isolation:</strong> No banking credential integrations or cloud account database sync pathways.</li>
+                        <li><strong>Safe Exploration Environment:</strong> Built with zero ad-network tracking wrappers or tracking scripts.</li>
+                    </ul>
+
+                    <h4 style="margin-bottom: 5px; font-family: Arial; color: #000080;">Mainframe Interface Visualizations:</h4>
+                    <p style="font-size: 11px; font-style: italic; color: #555;">[Webmaster Note: Drop your custom graphic files into the project assets tree and update the image tags below once screenshots are captured!]</p>
+                    
+                    <div class="screenshot-grid">
+                        <div class="faux-screenshot">
+                            <img src="" alt="[ Screen 1: Projection Matrix ]" style="max-width:100%; display:block; color:#00FF00;"><br>
+                            Dashboard Grid
+                        </div>
+                        <div class="faux-screenshot">
+                            <img src="" alt="[ Screen 2: Local Ledger ]" style="max-width:100%; display:block; color:#00FF00;"><br>
+                            Isolated Log Input
+                        </div>
+                        <div class="faux-screenshot">
+                            <img src="" alt="[ Screen 3: Liquidity Chart ]" style="max-width:100%; display:block; color:#00FF00;"><br>
+                            Trend Lines Engine
+                        </div>
+                    </div>
+                </div>
 
                 <div id="about">
                     <h2>Mission Directory & Background</h2>
@@ -261,7 +284,7 @@
                 <div id="projects">
                     <h2>Active Projects Repository</h2>
                     <ul>
-                        <li><strong>Project Alpha: Android Application Build v1.0</strong><br>A self-contained executable mobile environment. Currently undergoing distribution profiling.</li>
+                        <li><strong>Project Alpha: Android Application Build v1.0 (Flux Cash Flow)</strong><br>A self-contained executable mobile environment. Currently undergoing distribution profiling.</li>
                         <li><strong>Project Beta: Local System Infrastructure</strong><br>Optimizing hardware compilation trees and kernel layer variables on custom desktop architecture setups.</li>
                     </ul>
                 </div>
@@ -281,7 +304,6 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
 
                 <br>
 
-                <!-- 1998 INTERACTIVE GUESTBOOK -->
                 <div id="guestbook" style="border: 2px dashed #000080; background-color: #F9F9F9; padding: 15px; color:#000;">
                     <h2 style="border: none; color: #FF00FF;">✍️ Sign My Cyber-Guestbook</h2>
                     <form onsubmit="alert('Thank you for signing! Your entry has been transmitted to a 3.5 inch floppy disk.'); this.reset(); return false;">
@@ -296,9 +318,17 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
                 <br>
 
                 <div id="privacy">
-                    <h2>Security Compliance / Privacy Policy</h2>
-                    <p>This web node utilizes zero client-side storage, cookie injections, or external telemetric script trackers. Complete isolation protocols are enforced. Secure encryption pathways may be engaged once the certificate authority clears the handshake queue.</p>
-                    <p>Direct electronic feedback transmissions to the official exchange terminal: <a href="mailto:grant@welchx.com">⚡ grant@welchx.com ⚡</a></p>
+                    <h2>:: SECURITY COMPLIANCE / PRIVACY POLICY ::</h2>
+                    <p><strong>FLUX CASH FLOW — PRIVACY POLICY</strong><br>
+                    <em>Last Updated: June 2026</em></p>
+                    <p>This privacy declaration governs the execution architecture of the mobile application <strong>Flux Cash Flow</strong> and this companion web node. This system is designed with strict data isolation protocols.</p>
+                    <ul>
+                        <li><strong>Zero Data Collection:</strong> Flux Cash Flow is a completely offline cash flow projection utility. The application does not collect, harvest, transmit, or process any personal or financial information.</li>
+                        <li><strong>No External Infrastructure Sync:</strong> There are no user account registration requirements, no remote database configurations, no advertising trackers, and zero synchronization vectors with external banking APIs.</li>
+                        <li><strong>Local Storage Allocation:</strong> All projection models, variables, and financial calculations are stored strictly within the local application sandbox container on your physical mobile device.</li>
+                        <li><strong>No Telemetry or Geolocation:</strong> The system does not access device geolocation telemetry, network hardware identity packets, or peripheral tracking sensors.</li>
+                    </ul>
+                    <p>Direct electronic feedback transmissions regarding this policy to the official exchange terminal: <a href="mailto:grant@welchx.com">⚡ grant@welchx.com ⚡</a></p>
                 </div>
 
                 <div class="webring-container" style="color:#000;">
@@ -310,10 +340,8 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
                 </div>
             </td>
 
-            <!-- RIGHT COLUMN: Advertising Hub & Counter -->
             <td class="sidebar-right" valign="top">
                 
-                <!-- LIVE SATELLITE WEATHER WIDGET MODULE -->
                 <div style="border:2px inset #FFFFFF; background-color:#000000; color:#00FF00; font-family:monospace; padding:8px; font-size:11px; margin-bottom:15px;">
                     <center>
                         <span style="color:#FFFF00; font-weight:bold;">🛰️ LIVE CYBER-WEATHER</span><br>
@@ -329,7 +357,6 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
                 <center><span style="font-size: 10px; font-family: Arial; color: #666666;">- SPONSORED LINKS -</span></center>
                 <br>
 
-                <!-- THE BSOD LINK TRAP -->
                 <div class="fake-ad ad-yellow" onclick="triggerBsod()">
                     <span style="font-size: 14px; font-weight: bold; color: #FF0000;">⚡ UPGRADE NOW! ⚡</span><br><br>
                     Get <strong>10 MEGABYTES</strong> of Raw Web Power Free!<br><br>
@@ -357,7 +384,6 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
         </tr>
     </table>
 
-    <!-- SYSTEM JAVASCRIPT MAINFRAME ENGINE -->
     <script>
         // LIVE WEATHER INTEGRATION
         async function getLiveTelemetry() {
@@ -409,42 +435,39 @@ SKILLS: Data Integrity, Systems Troubleshooting, Logic
         // FLOATING DESKTOP ASSISTANT LOGIC PIPELINE
         let assistantHasBeenClicked = false;
         const assistDialogues = [
-            "It looks like you are trying to browse a portfolio! Need a floppy disk?",
+            "It looks like you are trying to view Flux Cash Flow updates! Need a floppy disk?",
             "Warning: Incoming telephone call detected. High risk of internet connection termination.",
             "Fun Fact: This 32-bit static portal architecture takes up less than 15 Kilobytes of sector space!",
-            "Did you know? Compiling your logic maps using Linux increases performance parameters by 400%!"
+            "Did you know? Flux Cash Flow maintains 100% data isolation on the hardware container layer!"
         ];
 
         function triggerAssistantDialogue() {
             const bubble = document.getElementById('assist-bubble');
             const avatar = document.getElementById('assist-avatar');
             
-            // First click behavior tracking
             if (!assistantHasBeenClicked) {
                 assistantHasBeenClicked = true;
-                avatar.classList.remove('bounce-active'); // Turn off bouncing attention beacon
+                avatar.classList.remove('bounce-active'); 
             }
 
             bubble.style.opacity = "1";
             bubble.style.display = "block";
             
-            // Pull a random unhelpful line
             const randomLine = assistDialogues[Math.floor(Math.random() * assistDialogues.length)];
             bubble.innerText = randomLine;
             
             avatar.style.transform = "scale(1.2)";
             setTimeout(() => avatar.style.transform = "none", 200);
 
-            // Auto fade out bubble message text container after 5 seconds of display
             setTimeout(() => {
-                if(bubble.innerText === randomLine) { // Verify user hasn't spammed another click
+                if(bubble.innerText === randomLine) { 
                     bubble.style.opacity = "0";
                     setTimeout(() => { if(bubble.style.opacity === "0") bubble.style.display = "none"; }, 500);
                 }
             }, 5000);
         }
 
-        // EASTER EGG: MANUAL SYSTEM ALERT MODALS
+        // EASTER EGG Alert Dialog box triggers
         function openWelcomeModal() { document.getElementById('welcome-modal').style.display = 'flex'; }
         function closeWelcomeModal() { document.getElementById('welcome-modal').style.display = 'none'; }
 
